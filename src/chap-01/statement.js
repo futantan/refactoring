@@ -1,13 +1,15 @@
 function statement(invoice, plays) {
-  let result = `Statement for ${invoice.customer}\n`;
+  return renderPlainText(invoice, plays);
+}
 
+function renderPlainText(invoice, plays) {
+  let result = `Statement for ${invoice.customer}\n`;
   for (let perf of invoice.performances) {
     // print line for this order
     result += `  ${playFor(perf).name}: ${usd(amountFor(perf))} (${
       perf.audience
     } seats)\n`;
   }
-
   result += `Amount owed is ${usd(totalAmount(invoice))}\n`;
   result += `You earned ${totalVolumeCredits()} credits\n`;
   return result;
